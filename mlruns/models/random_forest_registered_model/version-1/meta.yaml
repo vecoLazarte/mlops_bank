@@ -1,0 +1,16 @@
+aliases:
+- challenger
+creation_timestamp: 1750757841795
+current_stage: None
+description: random_forest entrenado sobre todo el conjunto de train con los mejores
+  hiperparametros segun el auc.
+last_updated_timestamp: 1750757841860
+name: random_forest_registered_model
+run_id: 9932bb42559144388aa50b48c5d0e7f3
+run_link: ''
+source: mlflow-artifacts:/113533721301238043/9932bb42559144388aa50b48c5d0e7f3/artifacts/random_forest_model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/113533721301238043/9932bb42559144388aa50b48c5d0e7f3/artifacts/random_forest_model
+user_id: null
+version: 1

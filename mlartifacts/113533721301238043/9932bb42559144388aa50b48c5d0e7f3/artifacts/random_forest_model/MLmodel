@@ -1,0 +1,105 @@
+artifact_path: random_forest_model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.11
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+is_signature_from_type_hint: false
+mlflow_version: 2.22.0
+model_size_bytes: 5452667
+model_uuid: 2bad80edc3f94456ae1b6b229e566303
+prompts: null
+run_id: 9932bb42559144388aa50b48c5d0e7f3
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "ANTIGUEDAD", "required": true}, {"type": "double",
+    "name": "EDAD", "required": true}, {"type": "double", "name": "FLAG_LIMA_PROVINCIA",
+    "required": true}, {"type": "double", "name": "FLG_BANCARIZADO", "required": true},
+    {"type": "double", "name": "FLG_NOMINA", "required": true}, {"type": "double",
+    "name": "FLG_SDO_OTSSFF_MENOS0", "required": true}, {"type": "double", "name":
+    "FLG_SDO_OTSSFF_MENOS1", "required": true}, {"type": "double", "name": "FLG_SDO_OTSSFF_MENOS2",
+    "required": true}, {"type": "double", "name": "FLG_SDO_OTSSFF_MENOS3", "required":
+    true}, {"type": "double", "name": "FLG_SDO_OTSSFF_MENOS4", "required": true},
+    {"type": "double", "name": "FLG_SDO_OTSSFF_MENOS5", "required": true}, {"type":
+    "double", "name": "FLG_SEGURO_MENOS0", "required": true}, {"type": "double", "name":
+    "FLG_SEGURO_MENOS1", "required": true}, {"type": "double", "name": "FLG_SEGURO_MENOS2",
+    "required": true}, {"type": "double", "name": "FLG_SEGURO_MENOS3", "required":
+    true}, {"type": "double", "name": "FLG_SEGURO_MENOS4", "required": true}, {"type":
+    "double", "name": "FLG_SEGURO_MENOS5", "required": true}, {"type": "double", "name":
+    "MESES_CON_SALDO", "required": true}, {"type": "double", "name": "MESES_CON_SEGURO",
+    "required": true}, {"type": "double", "name": "NRO_ACCES_CANAL1_MENOS0", "required":
+    true}, {"type": "double", "name": "NRO_ACCES_CANAL1_MENOS1", "required": true},
+    {"type": "double", "name": "NRO_ACCES_CANAL1_MENOS2", "required": true}, {"type":
+    "double", "name": "NRO_ACCES_CANAL1_MENOS3", "required": true}, {"type": "double",
+    "name": "NRO_ACCES_CANAL1_MENOS4", "required": true}, {"type": "double", "name":
+    "NRO_ACCES_CANAL1_MENOS5", "required": true}, {"type": "double", "name": "NRO_ACCES_CANAL2_MENOS0",
+    "required": true}, {"type": "double", "name": "NRO_ACCES_CANAL2_MENOS1", "required":
+    true}, {"type": "double", "name": "NRO_ACCES_CANAL2_MENOS2", "required": true},
+    {"type": "double", "name": "NRO_ACCES_CANAL2_MENOS3", "required": true}, {"type":
+    "double", "name": "NRO_ACCES_CANAL2_MENOS4", "required": true}, {"type": "double",
+    "name": "NRO_ACCES_CANAL2_MENOS5", "required": true}, {"type": "double", "name":
+    "NRO_ACCES_CANAL3_MENOS0", "required": true}, {"type": "double", "name": "NRO_ACCES_CANAL3_MENOS1",
+    "required": true}, {"type": "double", "name": "NRO_ACCES_CANAL3_MENOS2", "required":
+    true}, {"type": "double", "name": "NRO_ACCES_CANAL3_MENOS3", "required": true},
+    {"type": "double", "name": "NRO_ACCES_CANAL3_MENOS4", "required": true}, {"type":
+    "double", "name": "NRO_ACCES_CANAL3_MENOS5", "required": true}, {"type": "double",
+    "name": "NRO_ENTID_SSFF_MENOS0", "required": true}, {"type": "double", "name":
+    "NRO_ENTID_SSFF_MENOS1", "required": true}, {"type": "double", "name": "NRO_ENTID_SSFF_MENOS2",
+    "required": true}, {"type": "double", "name": "NRO_ENTID_SSFF_MENOS3", "required":
+    true}, {"type": "double", "name": "NRO_ENTID_SSFF_MENOS4", "required": true},
+    {"type": "double", "name": "NRO_ENTID_SSFF_MENOS5", "required": true}, {"type":
+    "double", "name": "PROM_NRO_ACCES_CANAL1_0M_2M", "required": true}, {"type": "double",
+    "name": "PROM_NRO_ACCES_CANAL1_3M_5M", "required": true}, {"type": "double", "name":
+    "PROM_NRO_ACCES_CANAL1_6M", "required": true}, {"type": "double", "name": "PROM_NRO_ACCES_CANAL2_0M_2M",
+    "required": true}, {"type": "double", "name": "PROM_NRO_ACCES_CANAL2_3M_5M", "required":
+    true}, {"type": "double", "name": "PROM_NRO_ACCES_CANAL2_6M", "required": true},
+    {"type": "double", "name": "PROM_NRO_ACCES_CANAL3_0M_2M", "required": true}, {"type":
+    "double", "name": "PROM_NRO_ACCES_CANAL3_3M_5M", "required": true}, {"type": "double",
+    "name": "PROM_NRO_ACCES_CANAL3_6M", "required": true}, {"type": "double", "name":
+    "PROM_NRO_ENTID_SSFF_0M_2M", "required": true}, {"type": "double", "name": "PROM_NRO_ENTID_SSFF_3M_5M",
+    "required": true}, {"type": "double", "name": "PROM_NRO_ENTID_SSFF_6M", "required":
+    true}, {"type": "double", "name": "PROM_SDO_ACTIVO_0M_2M", "required": true},
+    {"type": "double", "name": "PROM_SDO_ACTIVO_3M_5M", "required": true}, {"type":
+    "double", "name": "PROM_SDO_ACTIVO_6M", "required": true}, {"type": "double",
+    "name": "RANG_INGRESO", "required": true}, {"type": "double", "name": "RANG_NRO_PRODUCTOS_MENOS0",
+    "required": true}, {"type": "double", "name": "RANG_SDO_PASIVO_MENOS0", "required":
+    true}, {"type": "double", "name": "SDO_ACTIVO_MENOS0", "required": true}, {"type":
+    "double", "name": "SDO_ACTIVO_MENOS1", "required": true}, {"type": "double", "name":
+    "SDO_ACTIVO_MENOS2", "required": true}, {"type": "double", "name": "SDO_ACTIVO_MENOS3",
+    "required": true}, {"type": "double", "name": "SDO_ACTIVO_MENOS4", "required":
+    true}, {"type": "double", "name": "SDO_ACTIVO_MENOS5", "required": true}, {"type":
+    "double", "name": "VAR_NRO_ACCES_CANAL1_3M", "required": true}, {"type": "double",
+    "name": "VAR_NRO_ACCES_CANAL1_6M", "required": true}, {"type": "double", "name":
+    "VAR_NRO_ACCES_CANAL2_3M", "required": true}, {"type": "double", "name": "VAR_NRO_ACCES_CANAL2_6M",
+    "required": true}, {"type": "double", "name": "VAR_NRO_ACCES_CANAL3_3M", "required":
+    true}, {"type": "double", "name": "VAR_NRO_ACCES_CANAL3_6M", "required": true},
+    {"type": "double", "name": "VAR_NRO_ENTID_SSFF_3M", "required": true}, {"type":
+    "double", "name": "VAR_NRO_ENTID_SSFF_6M", "required": true}, {"type": "double",
+    "name": "VAR_SDO_ACTIVO_3M", "required": true}, {"type": "double", "name": "VAR_SDO_ACTIVO_6M",
+    "required": true}, {"type": "double", "name": "dictamen_NO PROCEDE", "required":
+    true}, {"type": "double", "name": "dictamen_PROCEDE PARCIAL", "required": true},
+    {"type": "double", "name": "dictamen_PROCEDE TOTAL", "required": true}, {"type":
+    "double", "name": "nro_dictamenes", "required": true}, {"type": "double", "name":
+    "nro_productos_servicios", "required": true}, {"type": "double", "name": "nro_submotivos",
+    "required": true}, {"type": "double", "name": "nro_tipos_requerimiento", "required":
+    true}, {"type": "double", "name": "tipo_Reclamo", "required": true}, {"type":
+    "double", "name": "tipo_Solicitud", "required": true}, {"type": "double", "name":
+    "total_requerimientos", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1,
+    2]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-06-24 09:37:16.547397'

@@ -1,0 +1,17 @@
+aliases:
+- challenger
+- champion
+creation_timestamp: 1750757826110
+current_stage: Production
+description: xgbost fue el modelo que obtuvo mejor F1-score por lo que ahora sera
+  el modelo productivo
+last_updated_timestamp: 1750757857104
+name: xgbost_registered_model
+run_id: 9932bb42559144388aa50b48c5d0e7f3
+run_link: ''
+source: mlflow-artifacts:/113533721301238043/9932bb42559144388aa50b48c5d0e7f3/artifacts/xgbost_model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/113533721301238043/9932bb42559144388aa50b48c5d0e7f3/artifacts/xgbost_model
+user_id: null
+version: 1
