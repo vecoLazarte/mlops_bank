@@ -1,0 +1,2 @@
+model_parameters,model_rank,auc_score_mean,auc_score_std,auc_score_cv
+"{'eta': 0.05, 'gamma': 0, 'max_depth': 7, 'min_child_weight': 10, 'n_estimators': 100, 'scale_pos_weight': 1, 'subsample': 0.8}",1,0.8029130253246216,0.016209976532063578,0.020188956986355783
