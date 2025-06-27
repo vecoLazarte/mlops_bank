@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1750753711769
+current_stage: None
+description: ''
+last_updated_timestamp: 1750753711769
+name: Xgbost_chester
+run_id: 3a851ec7e19a4267bf7702725c17c205
+run_link: ''
+source: mlflow-artifacts:/113533721301238043/3a851ec7e19a4267bf7702725c17c205/artifacts/xgbost_model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/113533721301238043/3a851ec7e19a4267bf7702725c17c205/artifacts/xgbost_model
+user_id: null
+version: 1

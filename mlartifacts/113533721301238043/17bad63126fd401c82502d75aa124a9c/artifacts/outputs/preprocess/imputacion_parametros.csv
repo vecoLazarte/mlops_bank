@@ -1,0 +1,6 @@
+dataframe,variable,estrategia,valor
+clientes,RANG_INGRESO,moda,Rang_ingreso_02
+clientes,FLAG_LIMA_PROVINCIA,moda,Lima
+clientes,EDAD,mediana,32.0
+clientes,ANTIGUEDAD,mediana,5.0
+requerimientos,DICTAMEN,moda,PROCEDE TOTAL

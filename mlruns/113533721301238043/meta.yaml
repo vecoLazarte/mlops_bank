@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/113533721301238043
+creation_time: 1750696756214
+experiment_id: '113533721301238043'
+last_update_time: 1750696756214
+lifecycle_stage: active
+name: pipeline-train-attrition-detection_1

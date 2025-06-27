@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/113533721301238043/934baabea7dd4210bd0ca22b563c1e19/artifacts
+deleted_time: 1750744920635
+end_time: 1750713422021
+entry_point_name: ''
+experiment_id: '113533721301238043'
+lifecycle_stage: deleted
+run_id: 934baabea7dd4210bd0ca22b563c1e19
+run_name: '255'
+run_uuid: 934baabea7dd4210bd0ca22b563c1e19
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750713064330
+status: 3
+tags: []
+user_id: Omen
