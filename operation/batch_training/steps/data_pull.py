@@ -1,6 +1,4 @@
 from batch_training_utils import TRACKING_SERVER_ARN, DEFAULT_PATH, SAGEMAKER_ROLE
-import subprocess
-subprocess.run(['pip', 'install', 'sagemaker==2.244.0'])
 from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"

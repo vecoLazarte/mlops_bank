@@ -1,6 +1,4 @@
 from batch_training_utils import TRACKING_SERVER_ARN, DEFAULT_PATH, SAGEMAKER_ROLE
-import subprocess
-subprocess.run(['pip', 'install', 'sagemaker==2.244.0'])
 from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
@@ -31,7 +29,7 @@ def model_training(experiment_name: str, run_id: str, data_pull_id: str ) -> str
     from mlflow.models.signature import infer_signature
     from mlflow.tracking import MlflowClient
     output_dir = tempfile.mkdtemp()
-    mlflow.set_tracking_uri(tracking_server_arn)
+    mlflow.set_tracking_uri(TRACKING_SERVER_ARN)
     mlflow.set_experiment(experiment_name)
     train_s3_path = f"s3://{default_path}"
 
