@@ -3,7 +3,7 @@
  on:
    push:
      branches:
-       - main
+       - feature/aws
 
  jobs:
    training-pipeline:
