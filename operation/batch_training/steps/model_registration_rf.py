@@ -10,7 +10,8 @@ default_path = DEFAULT_PATH
     role=SAGEMAKER_ROLE
 )
 def register_random_forest_model(experiment_name: str, name_path: str, run_id: str, evaluation_run_id: str):
-
+    import subprocess
+    subprocess.run(['pip', 'install', 'mlflow==2.13.2', 'sagemaker==2.244.0'])
     import mlflow
     from mlflow.artifacts import download_artifacts
     from mlflow.models.signature import infer_signature

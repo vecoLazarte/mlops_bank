@@ -11,7 +11,7 @@ default_path = DEFAULT_PATH
 )
 def evaluate(experiment_name: str, run_id: str, data_pull_id: str, training_run_id: str) -> tuple[str, str, str]:
     import subprocess
-    subprocess.run(['pip', 'install', 'awswrangler==3.12.0']) 
+    subprocess.run(['pip', 'install', 'mlflow==2.13.2', 'awswrangler==3.12.0', 'sagemaker==2.244.0']) 
     import awswrangler as wr
     import mlflow
     from mlflow.artifacts import download_artifacts

@@ -10,12 +10,13 @@ default_path = DEFAULT_PATH
     role=SAGEMAKER_ROLE
 )
 def data_pull(experiment_name: str, run_name: str, cod_month: str, cod_month_start: int, cod_month_end: int) -> tuple[str, str]:
+    import subprocess
+    subprocess.run(['pip', 'install', 'mlflow==2.13.2', 'awswrangler==3.12.0', 'sagemaker==2.244.0'])
     import mlflow
     from mlflow.artifacts import download_artifacts
     mlflow.set_tracking_uri(TRACKING_SERVER_ARN)
     mlflow.set_experiment(experiment_name)
-    import subprocess
-    subprocess.run(['pip', 'install', 'awswrangler==3.12.0']) 
+ 
     import awswrangler as wr
     import os
     from sklearn.preprocessing import LabelEncoder
