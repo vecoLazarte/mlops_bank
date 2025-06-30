@@ -6,7 +6,8 @@ default_path = DEFAULT_PATH
 
 @step(
     name="ModelTraining",
-    instance_type=instance_type
+    instance_type=instance_type,
+    role=SAGEMAKER_ROLE
 )
 def model_training(experiment_name: str, run_id: str, data_pull_id: str ) -> str:
     import subprocess

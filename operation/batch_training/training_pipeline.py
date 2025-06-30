@@ -108,7 +108,7 @@ conditional_register_step = ConditionStep(
 
 # Pipeline creation
 pipeline = Pipeline(
-    name=pipeline_name,
+    name=PIPELINE_NAME,
     steps=[
         data_pull_step,
         model_training_step,
@@ -118,4 +118,4 @@ pipeline = Pipeline(
     parameters=[cod_month, cod_month_start, cod_month_end]
 )
 
-pipeline.upsert(role_arn=role)
+pipeline.upsert(role_arn=SAGEMAKER_ROLE)

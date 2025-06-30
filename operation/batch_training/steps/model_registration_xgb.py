@@ -6,7 +6,8 @@ default_path = DEFAULT_PATH
 
 @step(
     name="RegisterXGBoostModel", 
-    instance_type=instance_type
+    instance_type=instance_type,
+    role=SAGEMAKER_ROLE
 )
 def register_xgboost_model(experiment_name: str, name_path: str, run_id: str, evaluation_run_id: str):
     import mlflow

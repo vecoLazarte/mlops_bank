@@ -6,7 +6,8 @@ default_path = DEFAULT_PATH
 
 @step(
     name="ModelEvaluation",
-    instance_type=instance_type
+    instance_type=instance_type,
+    role=SAGEMAKER_ROLE
 )
 def evaluate(experiment_name: str, run_id: str, data_pull_id: str, training_run_id: str) -> tuple[str, str, str]:
     import subprocess

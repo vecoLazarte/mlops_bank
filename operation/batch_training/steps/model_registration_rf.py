@@ -6,7 +6,8 @@ default_path = DEFAULT_PATH
 
 @step(
     name="RegisterRandomForestModel", 
-    instance_type=instance_type 
+    instance_type=instance_type,
+    role=SAGEMAKER_ROLE
 )
 def register_random_forest_model(experiment_name: str, name_path: str, run_id: str, evaluation_run_id: str):
 

@@ -6,7 +6,8 @@ default_path = DEFAULT_PATH
 
 @step(
     name="DataPull",
-    instance_type=instance_type
+    instance_type=instance_type,
+    role=SAGEMAKER_ROLE
 )
 def data_pull(experiment_name: str, run_name: str, cod_month: str, cod_month_start: int, cod_month_end: int) -> tuple[str, str]:
     import mlflow
