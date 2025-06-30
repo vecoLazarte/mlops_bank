@@ -1,6 +1,9 @@
 name: CI/CD for Inference Pipeline
 
-on: workflow_dispatch 
+on:
+  push:
+    branches:
+      - feature/aws
 
 jobs:
   inference-pipeline:
@@ -29,4 +32,4 @@ jobs:
       - name: Create inference pipeline
         run: python operation/batch_inference/inference_pipeline.py
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB
