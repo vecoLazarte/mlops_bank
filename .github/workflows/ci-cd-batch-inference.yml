@@ -1,7 +1,6 @@
 name: CI/CD for Inference Pipeline
 
-on:
-  workflow_dispatch:  # Solo ejecución manual
+on: workflow_dispatch 
 
 jobs:
   inference-pipeline:
