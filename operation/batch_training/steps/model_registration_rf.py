@@ -1,4 +1,4 @@
-from batch_training_utils import TRACKING_SERVER_ARN, DEFAULT_PATH, SAGEMAKER_ROLE
+from batch_training_utils import TRACKING_SERVER_ARN, DEFAULT_PATH, SAGEMAKER_ROLE, MODEL_NAME
 from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
@@ -33,7 +33,7 @@ def register_random_forest_model(experiment_name: str, name_path: str, run_id: s
         with mlflow.start_run(run_name="RegisterRandomForestModel", nested=True):
 
             model_uri = f"runs:/{evaluation_run_id}/{name_path}_model"
-            model_registry_name = "attrition-detection-model"
+            model_registry_name = MODEL_NAME
             result = mlflow.register_model(model_uri=model_uri, name=model_registry_name)
             client = MlflowClient()
         
