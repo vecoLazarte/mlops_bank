@@ -32,4 +32,4 @@ jobs:
       - name: Create inference pipeline
         run: python operation/batch_inference/inference_pipeline.py
         env:
-          GITHUB
+          GITHUB_ACTOR: ${{ github.actor }}
