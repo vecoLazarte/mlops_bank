@@ -24,6 +24,9 @@ RUN pip install --no-cache-dir \
 
 # 3. Copiar tu entrypoint
 COPY entrypoint.py /var/task/entrypoint.py
+COPY faas_utils.py /var/task/faas_utils.py
+COPY utils.py /var/task/utils.py
+
 
 # 4. Configurar el handler para Lambda
 CMD ["entrypoint.lambda_handler"]
