@@ -1,9 +1,7 @@
 name: CI/CD for Inference Pipeline
 
 on:
-  push:
-    branches:
-      - feature/aws
+  workflow_dispatch
 
 jobs:
   inference-pipeline:
