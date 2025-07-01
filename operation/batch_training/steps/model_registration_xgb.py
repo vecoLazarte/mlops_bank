@@ -3,7 +3,7 @@ from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
 default_path = DEFAULT_PATH
-image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:c0c09ea26fc55f91d22332205111125cf27385a57d23d366184e0649230b38fa"
+image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:0db3705aa34e0b5fa57d94f8822541e94df35ecc3606a46c41dfe9e14e12d101"
 
 @step(
     name="RegisterXGBoostModel", 
