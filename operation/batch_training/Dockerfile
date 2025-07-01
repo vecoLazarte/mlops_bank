@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir \
     boto3 \
     numpy \
     pandas \
-    pyarrow==15.0.2  # requerido por mlflow<2.14
+    awswrangler==3.12.0
 
 # Validación opcional de instalación
 RUN python -c "import mlflow, xgboost, boto3, numpy, pandas; print('Librerías instaladas correctamente')"
