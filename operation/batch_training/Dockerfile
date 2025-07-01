@@ -1,5 +1,5 @@
 # Dockerfile
-FROM python:3.10-slim
+FROM python:3.12
 
 RUN pip install --no-cache-dir \
     mlflow==2.13.2 \
@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir \
     boto3 \
     numpy \
     pandas \
-    awswrangler==2.20.0
+    awswrangler==3.12.0
