@@ -31,20 +31,20 @@ jobs:
           aws-region: us-east-2
 
       - name: Login to ECR
-         run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ vars.ECR_URL }}
-       - name: Create ECR repository if it doesn't exist
-         run: |
-           REPO_NAME="${{ github.actor }}/batch-training"
-           EXISTING_REPO=$(aws ecr describe-repositories --repository-name "$REPO_NAME" 2>&1 || echo "NOT_FOUND")
-           if [[ "$EXISTING_REPO" == *"RepositoryNotFoundException"* ]]; then
-             echo "Repository does not exist. Creating..."
-             aws ecr create-repository --repository-name "$REPO_NAME"
-           else
-             echo "Repository exists."
-           fi
-       - name: Build image
-         run: docker build -t "${{ github.actor }}/batch-training" operation/batch_training
-       - name: Tag image
-         run: docker tag "${{ github.actor }}/batch-training:latest" "${{ vars.ECR_URL }}/${{ github.actor }}/batch-training:latest"
-       - name: Push image
-         run: docker push "${{ vars.ECR_URL }}/${{ github.actor }}/batch-training:latest"
+        run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ vars.ECR_URL }}
+      - name: Create ECR repository if it doesn't exist
+        run: |
+          REPO_NAME="${{ github.actor }}/batch-training"
+          EXISTING_REPO=$(aws ecr describe-repositories --repository-name "$REPO_NAME" 2>&1 || echo "NOT_FOUND")
+          if [[ "$EXISTING_REPO" == *"RepositoryNotFoundException"* ]]; then
+            echo "Repository does not exist. Creating..."
+            aws ecr create-repository --repository-name "$REPO_NAME"
+          else
+            echo "Repository exists."
+          fi
+      - name: Build image
+        run: docker build -t "${{ github.actor }}/batch-training" operation/batch_training
+      - name: Tag image
+        run: docker tag "${{ github.actor }}/batch-training:latest" "${{ vars.ECR_URL }}/${{ github.actor }}/batch-training:latest"
+      - name: Push image
+        run: docker push "${{ vars.ECR_URL }}/${{ github.actor }}/batch-training:latest"
