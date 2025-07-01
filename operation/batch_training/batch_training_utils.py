@@ -12,7 +12,7 @@ sagemaker_session = sagemaker.Session(default_bucket=DEFAULT_BUCKET,
                                       default_bucket_prefix=default_prefix)
 #Pipeline configuration
 PIPELINE_NAME = f"pipeline-train-{ENV_CODE}-{USERNAME}"
-MODEL_NAME = f"attrition-detection-{USERNAME}"
+MODEL_NAME = f"attrition-detection-model"
 TRACKING_SERVER_ARN = TRACKING_SERVER_ARN
 USERNAME = USERNAME
 ENV_CODE = ENV_CODE
