@@ -1,9 +1,9 @@
 name: CI/CD for Online Inference with FaaS
 
 on:
-   push:
-     branches:
-       - feature/mlflow
+  push:
+    branches:
+      - feature/aws
 
  jobs:
    inference-pipeline:
