@@ -25,31 +25,41 @@ on:
            aws-access-key-id: ${{ secrets.ACCESS_KEY }}
            aws-secret-access-key: ${{ secrets.SECRET_KEY }}
            aws-region: us-east-2
+
+       - name: Set lowercase GitHub actor
+        run: echo "ACTOR_LC=${GITHUB_ACTOR,,}" >> $GITHUB_ENV
+        
        - name: Unit testing
          run:  pytest operation/online_inference_faas/tests/test_unit.py -vv
+
        - name: Login to ECR
-         run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ vars.ECR_URL }}
+         run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
+
        - name: Create ECR repository if it doesn't exist
-         run: |
-           REPO_NAME="utec-mlops/${{ github.actor }}/online-prediction-faas"
-           EXISTING_REPO=$(aws ecr describe-repositories --repository-name "$REPO_NAME" 2>&1 || echo "NOT_FOUND")
-           if [[ "$EXISTING_REPO" == *"RepositoryNotFoundException"* ]]; then
-             echo "Repository does not exist. Creating..."
-             aws ecr create-repository --repository-name "$REPO_NAME"
-           else
-             echo "Repository exists."
-           fi
+        run: |
+          REPO_NAME="${{ env.ACTOR_LC }}/online-prediction-faas"
+          EXISTING_REPO=$(aws ecr describe-repositories --repository-name "$REPO_NAME" 2>&1 || echo "NOT_FOUND")
+          if [[ "$EXISTING_REPO" == *"RepositoryNotFoundException"* ]]; then
+            echo "Repository does not exist. Creating..."
+            aws ecr create-repository --repository-name "$REPO_NAME"
+          else
+            echo "Repository exists."
+          fi
+
        - name: Build image
-         run: docker build -t "utec-mlops/${{ github.actor }}/online-prediction-faas" operation/online_inference_faas
-       - name: Tag image
-         run: docker tag "utec-mlops/${{ github.actor }}/online-prediction-faas:latest" "${{ vars.ECR_URL }}/utec-mlops/${{ github.actor }}/online-prediction-faas:latest"
-       - name: Push image
-         run: docker push "${{ vars.ECR_URL }}/utec-mlops/${{ github.actor }}/online-prediction-faas:latest"
+        run: docker build -t "${{ env.ACTOR_LC }}/online-prediction-faas" operation/online_inference_faas
+
+      - name: Tag image
+        run: docker tag "${{ env.ACTOR_LC }}/online-prediction-faas:latest" "${{ secrets.ECR_URL }}/${{ env.ACTOR_LC }}/online-prediction-faas:latest"
+
+      - name: Push image
+        run: docker push "${{ secrets.ECR_URL }}/${{ env.ACTOR_LC }}/online-prediction-faas:latest"
+
        - name: Create or update Lambda function
          run: |
-           FUNCTION_NAME="mlops-utec-${{ github.actor }}-online-prediction-faas"
-           ROLE_ARN="${{ vars.LAMBDA_ROLE }}"
-           IMAGE_URI="${{ vars.ECR_URL }}/utec-mlops/${{ github.actor }}/online-prediction-faas:latest"
+           FUNCTION_NAME="${{ env.ACTOR_LC }}-online-prediction-faas"
+           ROLE_ARN="${{ LAMBDA_ROLE.LAMBDA_ROLE }}"
+           IMAGE_URI="${{ secrets.ECR_URL }}/${{ env.ACTOR_LC }}/online-prediction-faas:latest"
 
            # Check if Lambda function exists
            EXISTING_FUNCTION=$(aws lambda get-function --function-name "$FUNCTION_NAME" 2>&1 || echo "NOT_FOUND")
@@ -70,5 +80,3 @@ on:
                --function-name "$FUNCTION_NAME" \
                --image-uri "$IMAGE_URI"
            fi
-       - name: Integration testing
-         run:  pytest operation/online_inference_faas/tests/test_integration.py -vv

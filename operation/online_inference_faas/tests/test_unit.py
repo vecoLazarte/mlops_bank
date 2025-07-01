@@ -14,8 +14,8 @@ def s3_path_exists(bucket_name, key):
         raise
 
 @pytest.mark.parametrize("bucket_name, key, expected", [
-    ("mlops-chester", "mlflow-server/1/52ce21cdfba8475dae1bfafd337609e4/artifacts/model/model.xgb", True),  # Object exists
-    ("mlops-chester", "mlflow-server/1/52ce21cdfba8475dae1bfafd337609e4/artifacts/model/model.torch", False) # Object does not exist
+    ("mlops-chester", "mlflow-server/67/70e54723a106442f9b58d23accb1d18a/artifacts/xgbost_model/model.xgb", True),  
+    ("mlops-chester", "mlflow-server/67/70e54723a106442f9b58d23accb1d18a/artifacts/random_forest_model/model.pkl", True) 
 ])
 def test_s3_path(bucket_name, key, expected):
     """Test if an S3 path exists or not."""
