@@ -3,10 +3,12 @@ from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
 default_path = DEFAULT_PATH
+image_uri = "885854791233.dkr.ecr.us-east-1.amazonaws.com/sagemaker-distribution-prod@sha256:92cfd41f9293e3cfbf58f3bf728348fbb298bca0eeea44464968f08622d78ed0"
 
 @step(
     name="DataPull",
     instance_type=instance_type,
+    image_uri=image_uri,
     role=SAGEMAKER_ROLE
 )
 def data_pull(experiment_name: str, run_name: str, cod_month: str, cod_month_start: int, cod_month_end: int) -> tuple[str, str]:

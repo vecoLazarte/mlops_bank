@@ -3,10 +3,12 @@ from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
 default_path = DEFAULT_PATH
+image_uri = "885854791233.dkr.ecr.us-east-1.amazonaws.com/sagemaker-distribution-prod@sha256:92cfd41f9293e3cfbf58f3bf728348fbb298bca0eeea44464968f08622d78ed0"
 
 @step(
     name="RegisterXGBoostModel", 
     instance_type=instance_type,
+    image_uri=image_uri,
     role=SAGEMAKER_ROLE
 )
 def register_xgboost_model(experiment_name: str, name_path: str, run_id: str, evaluation_run_id: str):
