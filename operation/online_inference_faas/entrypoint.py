@@ -153,7 +153,7 @@ def lambda_handler(event, context):
        'FLG_SDO_OTSSFF_MENOS1', 'FLG_SDO_OTSSFF_MENOS2',
        'FLG_SDO_OTSSFF_MENOS3', 'FLG_SDO_OTSSFF_MENOS4',
        'FLG_SDO_OTSSFF_MENOS5'])
-    df_requerimientos_test = pd.DataFrame([event['body']['data_requerimiento']],columns=['ID_CORRELATIVO', 'TIPO_REQUERIMIENTO2', 'DICTAMEN', 'CODMES',
+    df_requerimientos_test = pd.DataFrame(event['body']['data_requerimiento'],columns=['ID_CORRELATIVO', 'TIPO_REQUERIMIENTO2', 'DICTAMEN', 'CODMES',
        'PRODUCTO_SERVICIO_2', 'SUBMOTIVO_2'])
     df_data_score_prepared = prepare_dataset(df_data_test, df_requerimientos_test)
     
