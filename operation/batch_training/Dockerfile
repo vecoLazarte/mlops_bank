@@ -1,13 +1,17 @@
-FROM python:3.10-slim
+FROM python:3.8
 
 # Actualizar pip
 RUN pip install --upgrade pip
 
-# Instalar mlflow primero (usa pyarrow<16)
-RUN pip install mlflow==2.13.2
+# Instalar librerías requeridas
+RUN pip install --no-cache-dir \
+    mlflow==2.13.2 \
+    sagemaker-mlflow==0.1.0 \
+    xgboost==2.1.4 \
+    boto3 \
+    numpy \
+    pandas \
+    pyarrow==15.0.2  # requerido por mlflow<2.14
 
-# Luego instalar awswrangler sin pyarrow
-RUN pip install awswrangler==3.12.0 --no-deps
-
-# Finalmente instalar sagemaker
-RUN pip install sagemaker==2.244.0
+# Validación opcional de instalación
+RUN python -c "import mlflow, xgboost, boto3, numpy, pandas; print('Librerías instaladas correctamente')"

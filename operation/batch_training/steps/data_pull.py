@@ -14,7 +14,7 @@ image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-trai
 )
 def data_pull(experiment_name: str, run_name: str, cod_month: str, cod_month_start: int, cod_month_end: int) -> tuple[str, str]:
     import subprocess
-    subprocess.run(['pip', 'install', 'mlflow==2.13.2', 'awswrangler==3.12.0', 'sagemaker==2.244.0'])
+    subprocess.run(['pip', 'install', 'awswrangler==3.12.0'])
     import mlflow
     from mlflow.artifacts import download_artifacts
     mlflow.set_tracking_uri(TRACKING_SERVER_ARN)
