@@ -3,10 +3,12 @@ from sagemaker.workflow.function_step import step
 
 # Global variables
 instance_type = "ml.m5.2xlarge"
+image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:feb7cd8be10df577e2d3f9c1782563bb256eeea07060a3ea63e439830f8a4f2b"
 
 @step(
     name="ModelInference",
     instance_type=instance_type,
+    image_uri=image_uri,
     role=SAGEMAKER_ROLE
 )
 def model_inference(experiment_name: str, run_id: str, data_pull_id: str, cod_month: int) -> str:
