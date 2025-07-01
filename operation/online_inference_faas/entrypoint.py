@@ -22,7 +22,7 @@ train_s3_path = f"s3://{default_path}"
 def prepare_impute_missing(df_data, x_cols):
     df_data_imputed = df_data.copy()
     s3_key = f'{default_prefix}/outputs/preprocess/imputacion_parametros.csv'
-    local_path = 'imputacion_parametros.csv'
+    local_path = '/tmp/imputacion_parametros.csv'
     s3.download_file(default_bucket, s3_key, local_path)
     df_impute_parameters = pd.read_csv(local_path)
     for col in x_cols:
@@ -60,20 +60,14 @@ def construir_variables_requerimientos(df_reqs, id_col='ID_CORRELATIVO'):
     n_dictamen = df_reqs.groupby(id_col)['DICTAMEN'].nunique().rename('nro_dictamenes').to_frame()
     n_producto = df_reqs.groupby(id_col)['PRODUCTO_SERVICIO_2'].nunique().rename('nro_productos_servicios').to_frame()
     n_submotivo = df_reqs.groupby(id_col)['SUBMOTIVO_2'].nunique().rename('nro_submotivos').to_frame()
-    tipo_ohe = pd.get_dummies(df_reqs['TIPO_REQUERIMIENTO2'], prefix='tipo')
-    tipo_ohe[id_col] = df_reqs[id_col]
-    tipo_ohe = tipo_ohe.groupby(id_col).sum()
-    dictamen_ohe = pd.get_dummies(df_reqs['DICTAMEN'], prefix='dictamen')
-    dictamen_ohe[id_col] = df_reqs[id_col]
-    dictamen_ohe = dictamen_ohe.groupby(id_col).sum()
-    df_agregado = pd.concat([total_reqs, n_tipo_req, n_dictamen, n_producto, n_submotivo, tipo_ohe, dictamen_ohe],axis=1)
+    df_agregado = pd.concat([total_reqs, n_tipo_req, n_dictamen, n_producto, n_submotivo],axis=1)
     return df_agregado
     
 def apply_label_encoders_to_test(df_test):
     df_test['RANG_SDO_PASIVO_MENOS0'] = df_test['RANG_SDO_PASIVO_MENOS0'].replace('Cero', 'Rango_SDO_00')
     df_test['FLAG_LIMA_PROVINCIA'] = df_test['FLAG_LIMA_PROVINCIA'].map({'Lima': 1, 'Provincia': 0})
     s3_key = f'{default_prefix}/outputs/preprocess/label_encoder_train.pkl'
-    local_path = 'label_encoder_train.pkl'
+    local_path = '/tmp/label_encoder_train.pkl'
     s3.download_file(default_bucket, s3_key, local_path)
     with open(local_path, 'rb') as f:
         encoders_clientes = pickle.load(f)
@@ -83,7 +77,7 @@ def apply_label_encoders_to_test(df_test):
     
 def aplicar_estandarizacion_test(df_test):
     s3_key = f'{default_prefix}/outputs/preprocess/scaler_train.pkl'
-    local_path = 'scaler_train.pkl'
+    local_path = '/tmp/scaler_train.pkl'
     s3.download_file(default_bucket, s3_key, local_path)
     with open(local_path, 'rb') as f:
         scaler = pickle.load(f)
@@ -122,7 +116,7 @@ artifact_path = info.artifact_path
 name_model = artifact_path.replace('_model', '')
 
 s3_key = f'{default_prefix}/outputs/train/feature_importance/{name_model}/feature_importance.csv'
-local_path = 'feature_importance.csv'
+local_path = '/tmp/feature_importance.csv'
 s3.download_file(default_bucket, s3_key, local_path)
 features = pd.read_csv(local_path)['variable'].to_list()
 
@@ -131,8 +125,30 @@ features = pd.read_csv(local_path)['variable'].to_list()
 def lambda_handler(event, context):
     if not isinstance(event, dict):  
         event = eval(event) 
-    df_data_test = pd.DataFrame([event['body']['data_cliente']])
-    df_requerimientos_test = pd.DataFrame([event['body']['data_requerimiento']])
+    df_data_test = pd.DataFrame([event['body']['data_cliente']],columns=['ID_CORRELATIVO', 'CODMES', 'FLG_BANCARIZADO', 'RANG_INGRESO',
+       'FLAG_LIMA_PROVINCIA', 'EDAD', 'ANTIGUEDAD', 'RANG_SDO_PASIVO_MENOS0',
+       'SDO_ACTIVO_MENOS0', 'SDO_ACTIVO_MENOS1', 'SDO_ACTIVO_MENOS2',
+       'SDO_ACTIVO_MENOS3', 'SDO_ACTIVO_MENOS4', 'SDO_ACTIVO_MENOS5',
+       'FLG_SEGURO_MENOS0', 'FLG_SEGURO_MENOS1', 'FLG_SEGURO_MENOS2',
+       'FLG_SEGURO_MENOS3', 'FLG_SEGURO_MENOS4', 'FLG_SEGURO_MENOS5',
+       'RANG_NRO_PRODUCTOS_MENOS0', 'FLG_NOMINA', 'NRO_ACCES_CANAL1_MENOS0',
+       'NRO_ACCES_CANAL1_MENOS1', 'NRO_ACCES_CANAL1_MENOS2',
+       'NRO_ACCES_CANAL1_MENOS3', 'NRO_ACCES_CANAL1_MENOS4',
+       'NRO_ACCES_CANAL1_MENOS5', 'NRO_ACCES_CANAL2_MENOS0',
+       'NRO_ACCES_CANAL2_MENOS1', 'NRO_ACCES_CANAL2_MENOS2',
+       'NRO_ACCES_CANAL2_MENOS3', 'NRO_ACCES_CANAL2_MENOS4',
+       'NRO_ACCES_CANAL2_MENOS5', 'NRO_ACCES_CANAL3_MENOS0',
+       'NRO_ACCES_CANAL3_MENOS1', 'NRO_ACCES_CANAL3_MENOS2',
+       'NRO_ACCES_CANAL3_MENOS3', 'NRO_ACCES_CANAL3_MENOS4',
+       'NRO_ACCES_CANAL3_MENOS5', 'NRO_ENTID_SSFF_MENOS0',
+       'NRO_ENTID_SSFF_MENOS1', 'NRO_ENTID_SSFF_MENOS2',
+       'NRO_ENTID_SSFF_MENOS3', 'NRO_ENTID_SSFF_MENOS4',
+       'NRO_ENTID_SSFF_MENOS5', 'FLG_SDO_OTSSFF_MENOS0',
+       'FLG_SDO_OTSSFF_MENOS1', 'FLG_SDO_OTSSFF_MENOS2',
+       'FLG_SDO_OTSSFF_MENOS3', 'FLG_SDO_OTSSFF_MENOS4',
+       'FLG_SDO_OTSSFF_MENOS5'])
+    df_requerimientos_test = pd.DataFrame(event['body']['data_requerimiento'],columns=['ID_CORRELATIVO', 'TIPO_REQUERIMIENTO2', 'DICTAMEN', 'CODMES',
+       'PRODUCTO_SERVICIO_2', 'SUBMOTIVO_2'])
     df_data_score_prepared = prepare_dataset(df_data_test, df_requerimientos_test)
     
     pred = model.predict_proba(df_data_score_prepared)[:, 1]

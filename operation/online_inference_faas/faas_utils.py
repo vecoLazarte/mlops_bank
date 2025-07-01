@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir
 from utils import ENV_CODE, TRACKING_SERVER_ARN, USERNAME, ENV_CODE
 
 
-MODEL_NAME = f"attrition-detection-{USERNAME}"
+MODEL_NAME = f"attrition-detection-model"
 MODEL_VERSION = "latest"
 TRACKING_SERVER_ARN = TRACKING_SERVER_ARN
 USERNAME = USERNAME
