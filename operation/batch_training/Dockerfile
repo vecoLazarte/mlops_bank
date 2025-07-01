@@ -12,7 +12,8 @@ RUN pip install --no-cache-dir \
     boto3 \
     numpy \
     pandas \
-    awswrangler==3.12.0
+    awswrangler==3.12.0\
+    fsspec==2024.12.0
 
 # Validación opcional de instalación
 RUN python -c "import mlflow, xgboost, boto3, numpy, pandas; print('Librerías instaladas correctamente')"
