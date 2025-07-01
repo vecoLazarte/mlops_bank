@@ -131,8 +131,30 @@ features = pd.read_csv(local_path)['variable'].to_list()
 def lambda_handler(event, context):
     if not isinstance(event, dict):  
         event = eval(event) 
-    df_data_test = pd.DataFrame([event['body']['data_cliente']])
-    df_requerimientos_test = pd.DataFrame([event['body']['data_requerimiento']])
+    df_data_test = pd.DataFrame([event['body']['data_cliente']],columns=['ID_CORRELATIVO', 'CODMES', 'FLG_BANCARIZADO', 'RANG_INGRESO',
+       'FLAG_LIMA_PROVINCIA', 'EDAD', 'ANTIGUEDAD', 'RANG_SDO_PASIVO_MENOS0',
+       'SDO_ACTIVO_MENOS0', 'SDO_ACTIVO_MENOS1', 'SDO_ACTIVO_MENOS2',
+       'SDO_ACTIVO_MENOS3', 'SDO_ACTIVO_MENOS4', 'SDO_ACTIVO_MENOS5',
+       'FLG_SEGURO_MENOS0', 'FLG_SEGURO_MENOS1', 'FLG_SEGURO_MENOS2',
+       'FLG_SEGURO_MENOS3', 'FLG_SEGURO_MENOS4', 'FLG_SEGURO_MENOS5',
+       'RANG_NRO_PRODUCTOS_MENOS0', 'FLG_NOMINA', 'NRO_ACCES_CANAL1_MENOS0',
+       'NRO_ACCES_CANAL1_MENOS1', 'NRO_ACCES_CANAL1_MENOS2',
+       'NRO_ACCES_CANAL1_MENOS3', 'NRO_ACCES_CANAL1_MENOS4',
+       'NRO_ACCES_CANAL1_MENOS5', 'NRO_ACCES_CANAL2_MENOS0',
+       'NRO_ACCES_CANAL2_MENOS1', 'NRO_ACCES_CANAL2_MENOS2',
+       'NRO_ACCES_CANAL2_MENOS3', 'NRO_ACCES_CANAL2_MENOS4',
+       'NRO_ACCES_CANAL2_MENOS5', 'NRO_ACCES_CANAL3_MENOS0',
+       'NRO_ACCES_CANAL3_MENOS1', 'NRO_ACCES_CANAL3_MENOS2',
+       'NRO_ACCES_CANAL3_MENOS3', 'NRO_ACCES_CANAL3_MENOS4',
+       'NRO_ACCES_CANAL3_MENOS5', 'NRO_ENTID_SSFF_MENOS0',
+       'NRO_ENTID_SSFF_MENOS1', 'NRO_ENTID_SSFF_MENOS2',
+       'NRO_ENTID_SSFF_MENOS3', 'NRO_ENTID_SSFF_MENOS4',
+       'NRO_ENTID_SSFF_MENOS5', 'FLG_SDO_OTSSFF_MENOS0',
+       'FLG_SDO_OTSSFF_MENOS1', 'FLG_SDO_OTSSFF_MENOS2',
+       'FLG_SDO_OTSSFF_MENOS3', 'FLG_SDO_OTSSFF_MENOS4',
+       'FLG_SDO_OTSSFF_MENOS5'])
+    df_requerimientos_test = pd.DataFrame([event['body']['data_requerimiento']],columns=['ID_CORRELATIVO', 'TIPO_REQUERIMIENTO2', 'DICTAMEN', 'CODMES',
+       'PRODUCTO_SERVICIO_2', 'SUBMOTIVO_2'])
     df_data_score_prepared = prepare_dataset(df_data_test, df_requerimientos_test)
     
     pred = model.predict_proba(df_data_score_prepared)[:, 1]
