@@ -142,13 +142,7 @@ def data_pull(experiment_name: str, run_name: str, cod_month: str, cod_month_sta
         n_dictamen = df_reqs.groupby(id_col)['DICTAMEN'].nunique().rename('nro_dictamenes').to_frame()
         n_producto = df_reqs.groupby(id_col)['PRODUCTO_SERVICIO_2'].nunique().rename('nro_productos_servicios').to_frame()
         n_submotivo = df_reqs.groupby(id_col)['SUBMOTIVO_2'].nunique().rename('nro_submotivos').to_frame()
-        tipo_ohe = pd.get_dummies(df_reqs['TIPO_REQUERIMIENTO2'], prefix='tipo')
-        tipo_ohe[id_col] = df_reqs[id_col]
-        tipo_ohe = tipo_ohe.groupby(id_col).sum()
-        dictamen_ohe = pd.get_dummies(df_reqs['DICTAMEN'], prefix='dictamen')
-        dictamen_ohe[id_col] = df_reqs[id_col]
-        dictamen_ohe = dictamen_ohe.groupby(id_col).sum()
-        df_agregado = pd.concat([total_reqs, n_tipo_req, n_dictamen, n_producto, n_submotivo, tipo_ohe, dictamen_ohe],axis=1)
+        df_agregado = pd.concat([total_reqs, n_tipo_req, n_dictamen, n_producto, n_submotivo],axis=1)
         return df_agregado
     
     def apply_label_encoders_to_test(df_test):
