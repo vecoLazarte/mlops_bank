@@ -1,7 +1,6 @@
 name: CI/CD for Training Pipeline
 
-on:
-  workflow_dispatch
+on: workflow_dispatch
 
 jobs:
   training-pipeline:
