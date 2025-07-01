@@ -3,15 +3,18 @@ from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
 default_path = DEFAULT_PATH
+image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:feb7cd8be10df577e2d3f9c1782563bb256eeea07060a3ea63e439830f8a4f2b"
+
 
 @step(
     name="ModelEvaluation",
     instance_type=instance_type,
+    image_uri=image_uri,
     role=SAGEMAKER_ROLE
 )
 def evaluate(experiment_name: str, run_id: str, data_pull_id: str, training_run_id: str) -> tuple[str, str, str]:
     import subprocess
-    subprocess.run(['pip', 'install', 'mlflow==2.13.2', 'awswrangler==3.12.0', 'sagemaker==2.244.0']) 
+    subprocess.run(['pip', 'install', 'awswrangler==3.12.0']) 
     import awswrangler as wr
     import mlflow
     from mlflow.artifacts import download_artifacts
