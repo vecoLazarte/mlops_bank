@@ -1,4 +1,4 @@
-name: CI/CD for Training Pipeline
+name: Build and Push Docker to ECR
 
 on:
   push:
@@ -6,8 +6,9 @@ on:
       - feature/aws
 
 jobs:
-  training-pipeline:
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -15,7 +16,7 @@ jobs:
       - name: Python setup
         uses: actions/setup-python@v5
         with:
-          python-version: 3.9
+          python-version: 3.12
 
       - name: Install Python dependencies
         run: |
@@ -29,7 +30,28 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
           aws-region: us-east-2
 
-      - name: Create training pipeline
-        run: python operation/batch_training/training_pipeline.py
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
+      - name: Set lowercase GitHub actor
+        run: echo "ACTOR_LC=${GITHUB_ACTOR,,}" >> $GITHUB_ENV
+
+      - name: Login to ECR
+        run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
+
+      - name: Create ECR repository if it doesn't exist
+        run: |
+          REPO_NAME="${{ env.ACTOR_LC }}/batch-training"
+          EXISTING_REPO=$(aws ecr describe-repositories --repository-name "$REPO_NAME" 2>&1 || echo "NOT_FOUND")
+          if [[ "$EXISTING_REPO" == *"RepositoryNotFoundException"* ]]; then
+            echo "Repository does not exist. Creating..."
+            aws ecr create-repository --repository-name "$REPO_NAME"
+          else
+            echo "Repository exists."
+          fi
+
+      - name: Build image
+        run: docker build -t "${{ env.ACTOR_LC }}/batch-training" operation/batch_training
+
+      - name: Tag image
+        run: docker tag "${{ env.ACTOR_LC }}/batch-training:latest" "${{ secrets.ECR_URL }}/${{ env.ACTOR_LC }}/batch-training:latest"
+
+      - name: Push image
+        run: docker push "${{ secrets.ECR_URL }}/${{ env.ACTOR_LC }}/batch-training:latest"
