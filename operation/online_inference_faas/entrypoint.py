@@ -151,7 +151,7 @@ def lambda_handler(event, context):
        'PRODUCTO_SERVICIO_2', 'SUBMOTIVO_2'])
     df_data_score_prepared = prepare_dataset(df_data_test, df_requerimientos_test)
     
-    pred = model.predict_proba(df_data_score_prepared)[:, 1]
+    pred = model.predict_proba(df_data_score_prepared[features])[:, 1]
 
     clase = np.where(pred >= 0.415, 'High risk',np.where( pred >= 0.285, 'Medium risk','Low risk'))
 
