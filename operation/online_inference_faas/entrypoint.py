@@ -22,7 +22,7 @@ train_s3_path = f"s3://{default_path}"
 def prepare_impute_missing(df_data, x_cols):
     df_data_imputed = df_data.copy()
     s3_key = f'{default_prefix}/outputs/preprocess/imputacion_parametros.csv'
-    local_path = 'imputacion_parametros.csv'
+    local_path = '/tmp/imputacion_parametros.csv'
     s3.download_file(default_bucket, s3_key, local_path)
     df_impute_parameters = pd.read_csv(local_path)
     for col in x_cols:
@@ -73,7 +73,7 @@ def apply_label_encoders_to_test(df_test):
     df_test['RANG_SDO_PASIVO_MENOS0'] = df_test['RANG_SDO_PASIVO_MENOS0'].replace('Cero', 'Rango_SDO_00')
     df_test['FLAG_LIMA_PROVINCIA'] = df_test['FLAG_LIMA_PROVINCIA'].map({'Lima': 1, 'Provincia': 0})
     s3_key = f'{default_prefix}/outputs/preprocess/label_encoder_train.pkl'
-    local_path = 'label_encoder_train.pkl'
+    local_path = '/tmp/label_encoder_train.pkl'
     s3.download_file(default_bucket, s3_key, local_path)
     with open(local_path, 'rb') as f:
         encoders_clientes = pickle.load(f)
@@ -83,7 +83,7 @@ def apply_label_encoders_to_test(df_test):
     
 def aplicar_estandarizacion_test(df_test):
     s3_key = f'{default_prefix}/outputs/preprocess/scaler_train.pkl'
-    local_path = 'scaler_train.pkl'
+    local_path = '/tmp/scaler_train.pkl'
     s3.download_file(default_bucket, s3_key, local_path)
     with open(local_path, 'rb') as f:
         scaler = pickle.load(f)
@@ -122,7 +122,7 @@ artifact_path = info.artifact_path
 name_model = artifact_path.replace('_model', '')
 
 s3_key = f'{default_prefix}/outputs/train/feature_importance/{name_model}/feature_importance.csv'
-local_path = 'feature_importance.csv'
+local_path = '/tmp/feature_importance.csv'
 s3.download_file(default_bucket, s3_key, local_path)
 features = pd.read_csv(local_path)['variable'].to_list()
 
