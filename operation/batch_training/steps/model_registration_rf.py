@@ -3,7 +3,7 @@ from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
 default_path = DEFAULT_PATH
-image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:24382aa768fc52e7f4fd2cad252d276e4b456adee181bc7f65588be5db6ea947"
+image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:5b3270dcf93ca8fa620d9e16b2a41fa2d58ded0e5ebc66329f33506844127a49"
 
 @step(
     name="RegisterRandomForestModel", 
