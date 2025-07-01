@@ -1,9 +1,6 @@
 name: CI/CD for Online Inference with FaaS
 
-on:
-  push:
-    branches:
-      - feature/aws
+on: workflow_dispatch
 
 jobs:
   inference-pipeline:
