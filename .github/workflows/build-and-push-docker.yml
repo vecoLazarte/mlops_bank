@@ -30,11 +30,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
           aws-region: us-east-2
 
+      - name: Set lowercase GitHub actor
+        run: echo "ACTOR_LC=${GITHUB_ACTOR,,}" >> $GITHUB_ENV
+
       - name: Login to ECR
         run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
+
       - name: Create ECR repository if it doesn't exist
         run: |
-          REPO_NAME="${{ github.actor }}/batch-training"
+          REPO_NAME="${{ env.ACTOR_LC }}/batch-training"
           EXISTING_REPO=$(aws ecr describe-repositories --repository-name "$REPO_NAME" 2>&1 || echo "NOT_FOUND")
           if [[ "$EXISTING_REPO" == *"RepositoryNotFoundException"* ]]; then
             echo "Repository does not exist. Creating..."
@@ -42,9 +46,12 @@ jobs:
           else
             echo "Repository exists."
           fi
+
       - name: Build image
-        run: docker build -t "${{ github.actor }}/batch-training" operation/batch_training
+        run: docker build -t "${{ env.ACTOR_LC }}/batch-training" operation/batch_training
+
       - name: Tag image
-        run: docker tag "${{ github.actor }}/batch-training:latest" "${{ secrets.ECR_URL }}/${{ github.actor }}/batch-training:latest"
+        run: docker tag "${{ env.ACTOR_LC }}/batch-training:latest" "${{ secrets.ECR_URL }}/${{ env.ACTOR_LC }}/batch-training:latest"
+
       - name: Push image
-        run: docker push "${{ secrets.ECR_URL }}/${{ github.actor }}/batch-training:latest"
+        run: docker push "${{ secrets.ECR_URL }}/${{ env.ACTOR_LC }}/batch-training:latest"
