@@ -3,7 +3,7 @@ from sagemaker.workflow.function_step import step
 
 instance_type = "ml.m5.2xlarge"
 default_path = DEFAULT_PATH
-image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:5b3270dcf93ca8fa620d9e16b2a41fa2d58ded0e5ebc66329f33506844127a49"
+image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-training@sha256:9e072265d03dd6650f327ab86d37922f18d56c66417a3b2e84e80e93ca5eef74"
 
 
 @step(
@@ -14,7 +14,7 @@ image_uri = "762233743642.dkr.ecr.us-east-2.amazonaws.com/vecolazarte/batch-trai
 )
 def data_pull(experiment_name: str, run_name: str, cod_month: str, cod_month_start: int, cod_month_end: int) -> tuple[str, str]:
     import subprocess
-    subprocess.run(['pip', 'install', 'awswrangler==3.12.0'])
+    subprocess.run(['pip', 'install', 'awswrangler==3.4.0'])
     import mlflow
     from mlflow.artifacts import download_artifacts
     mlflow.set_tracking_uri(TRACKING_SERVER_ARN)
