@@ -36,7 +36,7 @@ jobs:
         run: pytest operation/online_inference_faas/tests/test_unit.py -vv
 
       - name: Login to ECR
-        run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
+        run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_URL }}
 
       - name: Create ECR repository if it doesn't exist
         run: |
@@ -73,7 +73,7 @@ jobs:
               --code "ImageUri=$IMAGE_URI" \
               --role "$ROLE_ARN" \
               --architectures x86_64 \
-              --region us-east-1 \
+              --region us-east-2 \
               --timeout 120
           else
             echo "Updating Lambda function..."
