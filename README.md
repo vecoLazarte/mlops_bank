@@ -20,7 +20,7 @@ Este workflow automatiza el proceso de construcción y despliegue de una imagen 
      - `mlflow`, `sagemaker`, `sagemaker-mlflow`
      - `xgboost`, `boto3`, `pandas`, `numpy`
      - `awswrangler`, `fsspec`, `s3fs`
-5. 🏷️ Se aplica un tag a la imagen con el formato.
+5. 🏷️ Se aplica un tag a la imagen.
 6. 📤 Se publica la imagen en el repositorio de Amazon ECR correspondiente.
 
 - Integrado con MLflow Tracking Server definido por `TRACKING_SERVER_ARN`.
