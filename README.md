@@ -5,11 +5,26 @@ Construccion y despliegue de un modelo analítico que predice los clientes más 
 
 ## 💡 Solución
 
-### Pipeline de entrenamiento
+## ⚙️ GitHub Actions: CI/CD para Build y Push de Docker a Amazon ECR
 
-🚀 Detalles técnicos:
-- Ejecutado en una instancia `ml.m5.2xlarge` con contenedor personalizado (`image_uri` de ECR).
+Este workflow automatiza el proceso de construcción y despliegue de una imagen Docker personalizada en Amazon ECR, lista para ser usada en pipelines de entrenamiento con Amazon SageMaker.
+
+### 🧬 Flujo del Workflow
+
+1. 🚀 Se lanza una máquina virtual con Ubuntu como runner.
+2. 🔐 Se configuran las credenciales de AWS mediante `aws-actions/configure-aws-credentials`.
+3. 🐳 Se inicia sesión en Amazon ECR usando `aws ecr get-login-password`.
+4. 🏗️ Se construye una imagen Docker personalizada que incluye:
+   - Imagen base oficial: `python:3.9`
+   - Instalación de librerías esenciales para ciencia de datos y MLOps:
+     - `mlflow`, `sagemaker`, `sagemaker-mlflow`
+     - `xgboost`, `boto3`, `pandas`, `numpy`
+     - `awswrangler`, `fsspec`, `s3fs`
+5. 🏷️ Se aplica un tag a la imagen con el formato:
+
 - Integrado con MLflow Tracking Server definido por `TRACKING_SERVER_ARN`.
+
+### Pipeline de entrenamiento
 
 #### Step: Data pull
 Su objetivo principal es realizar la extracción, procesamiento y preparación de datos para el entrenamiento de modelos de machine learning, dejando todo listo en S3 y registrado en MLflow.
