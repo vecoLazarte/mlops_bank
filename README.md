@@ -7,7 +7,7 @@ Construccion y despliegue de un modelo analítico que predice los clientes más 
 
 ## ⚙️ GitHub Actions: CI/CD para Build y Push de Docker a Amazon ECR
 
-Este workflow automatiza el proceso de construcción y despliegue de una imagen Docker personalizada en Amazon ECR, lista para ser usada en pipelines de entrenamiento con Amazon SageMaker.
+Este workflow automatiza el proceso de construcción y despliegue de una imagen Docker personalizada en Amazon ECR, lista para ser usada en el pipeline de entrenamiento con Amazon SageMaker.
 
 ### 🧬 Flujo del Workflow
 
@@ -20,7 +20,8 @@ Este workflow automatiza el proceso de construcción y despliegue de una imagen 
      - `mlflow`, `sagemaker`, `sagemaker-mlflow`
      - `xgboost`, `boto3`, `pandas`, `numpy`
      - `awswrangler`, `fsspec`, `s3fs`
-5. 🏷️ Se aplica un tag a la imagen con el formato:
+5. 🏷️ Se aplica un tag a la imagen con el formato.
+6. 📤 Se publica la imagen en el repositorio de Amazon ECR correspondiente.
 
 - Integrado con MLflow Tracking Server definido por `TRACKING_SERVER_ARN`.
 
