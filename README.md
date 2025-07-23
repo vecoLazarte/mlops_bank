@@ -12,8 +12,8 @@ Este workflow automatiza el proceso de construcción y despliegue de una imagen 
 ### 🧬 Flujo del Workflow
 
 1. 🚀 Se lanza una máquina virtual con Ubuntu como runner.
-2. 🔐 Se configuran las credenciales de AWS mediante `aws-actions/configure-aws-credentials`.
-3. 🐳 Se inicia sesión en Amazon ECR usando `aws ecr get-login-password`.
+2. 🔐 Se configuran las credenciales de AWS.
+3. 🐳 Se inicia sesión en Amazon ECR.
 4. 🏗️ Se construye una imagen Docker personalizada que incluye:
    - Imagen base oficial: `python:3.9`
    - Instalación de librerías esenciales para ciencia de datos y MLOps:
