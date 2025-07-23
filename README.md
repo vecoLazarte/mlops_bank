@@ -35,7 +35,7 @@ Este workflow crea y ejecuta el pipeline de entrenamiento mediante los siguiente
 
 1. 🚀 Se lanza una máquina virtual con Ubuntu como runner.
 2. 🔐 Se configuran las credenciales de AWS.
-3. 🏗️ Se construye un pipeline de entrenamiento dentro de SageMaker.
+3. 🏗️ Se construye un pipeline de entrenamiento dentro de SageMaker considerando los siguientes steps: Data Pull, Model Training, Model Evaluation y Model Registration.
 
 #### 🧾 Step: Data Pull
 
